@@ -5,10 +5,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import linregress
 import seaborn as sns
+import os
 
 
+app_dir = os.path.dirname(__file__)
+csv_path = os.path.join(app_dir, "simulated_df_with_level.csv")
 
-df_pvt = pd.read_csv("simulated_df_with_level.csv", index_col=0)
+df_pvt = pd.read_csv(csv_path, index_col=0)
 month_cols = [c for c in df_pvt.columns if c != 'decline_level']
 
 # -------- Streamlit page config ----------
