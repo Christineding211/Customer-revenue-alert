@@ -16,11 +16,11 @@ month_cols = [c for c in df_pvt.columns if c != 'decline_level']
 
 # -------- Streamlit page config ----------
 st.set_page_config(layout="wide")
-st.markdown("<span style='font-size:48px; font-weight:bold;'>📉 Customer Revenue Decline Alert System</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size:28px; font-weight:bold;'>📉 Customer Revenue Decline Alert System</span>", unsafe_allow_html=True)
 
 #pricture. 1
 
-st.markdown("<span style='font-size:45px'><b>Distribution of Customer Decline Levels</b></span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size:24px'><b>Distribution of Customer Decline Levels</b></span>", unsafe_allow_html=True)
 level_counts = df_pvt['decline_level'].value_counts().sort_index()
 
 fig1, ax1 = plt.subplots(figsize=(6,4))  
@@ -42,12 +42,12 @@ with col2:
 
 
 #pricture. 2
-st.markdown("<span style='font-size:45px; font-weight:bold;'>📈 Revenue Trend of Selected Customer</span>", unsafe_allow_html=True)
-st.markdown("<span style='font-size:38px'><b>Select Decline Level</b></span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size:24px; font-weight:bold;'>📈 Revenue Trend of Selected Customer</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size:14px'><b>Select Decline Level</b></span>", unsafe_allow_html=True)
 sel_level = st.selectbox("", [0,1,2,3], key="sel_level")
 cust_list = df_pvt[df_pvt['decline_level']==sel_level].index.astype(str).tolist()
 if cust_list:
-    st.markdown("<span style='font-size:38px'><b>Select Customer ID</b></span>", unsafe_allow_html=True)
+    st.markdown("<span style='font-size:14px'><b>Select Customer ID</b></span>", unsafe_allow_html=True)
     sel_cust = st.selectbox("", cust_list, key="sel_cust")
 
     rev = df_pvt.loc[sel_cust, month_cols]
@@ -85,8 +85,8 @@ if cust_list:
     # —— Business insights 
     st.markdown(
         f"""
-    <div style='font-size:45px; margin-bottom:10px;'>🔎 <b>Business Insights</b></div>
-    <ul style='font-size:32px; line-height:1.5;'>
+    <div style='font-size:20px; margin-bottom:10px;'>🔎 <b>Business Insights</b></div>
+    <ul style='font-size:16px; line-height:1.5;'>
     <li><b>Initial revenue:</b> £{y[0]:.0f}</li>
     <li><b>Latest revenue:</b> £{y[-1]:.0f}</li>
     <li><b>Average monthly decline speed:</b> {avg_monthly_decline:.1f}%</li>
@@ -100,7 +100,7 @@ else:
 
 #pricture. 3
 
-st.markdown("<span style='font-size:45px; font-weight:bold;'>📊 Group Revenue Trend Comparison</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size:24px; font-weight:bold;'>📊 Group Revenue Trend Comparison</span>", unsafe_allow_html=True)
 avg_by_level = df_pvt.groupby('decline_level')[month_cols].mean()
 fig3, ax3 = plt.subplots(figsize=(11,6))
 for lv in avg_by_level.index:
@@ -117,10 +117,10 @@ with col2:
     st.pyplot(fig3, use_container_width=True)
 
 #pricture. 4
-st.markdown("<h3 style='font-size:45px; font-weight:bold;'>🔥 Heatmap of Avg Monthly Revenue by Decline Level</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='font-size:24px; font-weight:bold;'>🔥 Heatmap of Avg Monthly Revenue by Decline Level</h3>", unsafe_allow_html=True)
 st.markdown(
 """
-<div style='font-size:32px ; line-height:1.6'>
+<div style='font-size:16px ; line-height:1.6'>
 The numbers in each cell represent the **average monthly revenue (£)** for all customers within the selected decline level.  
 Darker colours indicate higher revenue; lighter colours indicate lower revenue.
 </small>
